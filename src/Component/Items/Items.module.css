@@ -1,0 +1,21 @@
+.items_container:hover .items_container-button {
+  display: flex;
+  opacity: 1;
+}
+
+.items_container:hover .items_button-icon {
+  color: #ea580c;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  transition-delay: 100ms;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
