@@ -2,6 +2,7 @@ import React from "react";
 import { BiPlayCircle } from "react-icons/bi";
 import styles from "./Items.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   id?: string;
@@ -17,7 +18,7 @@ export default function Items({ id, thumb_url, name, year, slug }: Props) {
       <div
         className={`pr-1 ${styles["items_container"]} relative rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear`}
       >
-        <img
+        <Image
           src={`http://img.ophim1.com/uploads/movies/${thumb_url}`}
           alt={name}
           className="w-full h-[360px] rounded-md  object-cover"
