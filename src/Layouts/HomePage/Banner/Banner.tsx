@@ -95,6 +95,7 @@ export default function Banner({}: Props) {
     return banner.map((item: IsBanner, index) => {
       return (
         <Items
+          key={index}
           thumb_url={item.thumb_url}
           name={item.name}
           year={item.year}
