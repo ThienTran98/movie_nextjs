@@ -9,7 +9,7 @@ export default function NotFoundPage({}: Props) {
   const router = useRouter();
 
   const handleClickGoHome = () => {
-    router.push("/");
+    router.push(`/`);
   };
   const handleClickGoBack = () => {
     router.back();
@@ -39,7 +39,7 @@ export default function NotFoundPage({}: Props) {
           </svg>
         </div>
         <p className="mt-4 text-gray-600">
-          Let's get you back{" "}
+          Let's get you back
           <button
             onClick={handleClickGoHome}
             className="text-blue-500 hover:opacity-80 hover:text-white"
