@@ -22,8 +22,7 @@ interface IsItemsMovie {
   year: number;
   _id: string;
 }
-
-export default function index({}: Props) {
+export default function DetailPage({}: Props) {
   const [listMovieAll, setListMovieAll] = useState<IsItemsMovie[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);

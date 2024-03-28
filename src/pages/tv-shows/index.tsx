@@ -2,6 +2,6 @@ import React from "react";
 
 type Props = {};
 
-export default function index({}: Props) {
+export default function ShowPage({}: Props) {
   return <div>index</div>;
 }

@@ -2,6 +2,6 @@ import React from "react";
 
 type Props = {};
 
-export default function index({}: Props) {
-  return <div>index</div>;
+export default function Country({}: Props) {
+  return <div>Country</div>;
 }
