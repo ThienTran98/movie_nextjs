@@ -81,12 +81,11 @@ interface isDataMovie {
   msg: string;
   status: boolean;
 }
-export default function index({}: Props) {
+export default function Detail({}: Props) {
   const params = useParams<detailId>();
   const [detailMovie, setDetailMovie] = useState<isDataMovie>();
   const [linkEpisoder, setLinkEpisoder] = useState<string>("");
   const [isActive, setIsActive] = useState<number>(0);
-  console.log("isActive: ", isActive);
   useEffect(() => {
     if (params) {
       getDetailMovie(params?.detailId)
@@ -99,6 +98,7 @@ export default function index({}: Props) {
     }
   }, [params?.detailId]);
   const handleChangeChap = (item: isDataSever, index: number) => {
+    console.log("item: ", item);
     setIsActive(index);
     setLinkEpisoder(item.link_embed);
   };
@@ -108,8 +108,7 @@ export default function index({}: Props) {
         <Fragment key={index}>
           <iframe
             frameBorder={0}
-            width={720}
-            height={400}
+            className="w-full h-[400px]"
             src={
               linkEpisoder ? linkEpisoder : `${item.server_data[0].link_embed}`
             }
@@ -126,15 +125,15 @@ export default function index({}: Props) {
           <div className="">
             {item.server_data.map((_item, _index) => {
               return (
-                <Fragment>
+                <Fragment key={_index}>
                   <button
                     onClick={() => {
                       handleChangeChap(_item, _index);
                     }}
                     className={
                       isActive == _index
-                        ? "px-3 py-2 text-white bg-red-400 rounded-md min-w-14 w-14 max-w-14 m-2"
-                        : "px-3 py-2 text-white bg-blue-400 rounded-md min-w-14 w-14 max-w-14 m-2"
+                        ? "px-3 py-2 text-white bg-red-400 rounded-md min-w-14 w-14 max-w-14 m-2 font-bold"
+                        : "px-3 py-2 text-white bg-blue-400 rounded-md min-w-14 w-14 max-w-14 m-2 font-bold"
                     }
                   >
                     {_item.name}
@@ -154,67 +153,72 @@ export default function index({}: Props) {
     <div>
       <Header />
       <div className="py-5 px-10">
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center">
-            <div>
-              <img
-                src={`${detailMovie?.movie.poster_url}`}
-                alt="image"
-                className="rounded-lg shadow-xl min-w-[280px] max-w-[280px]  h-[360px] object-cover"
-              />
+        <div className="grid grid-cols-3">
+          <div className="col-span-2">
+            <div className="flex items-center ">
+              <div>
+                <img
+                  src={`${detailMovie?.movie.poster_url}`}
+                  alt="image"
+                  className="rounded-lg shadow-xl min-w-[280px] max-w-[280px]  h-[360px] object-cover"
+                />
+              </div>
+              <div className="ml-5 text-start text-red-500 leading-7">
+                <h2 className="text-white font-semibold text-2xl">
+                  {detailMovie?.movie.name}
+                </h2>
+                <p>
+                  Diễn viên :
+                  <span className="ml-1 text-white font-medium">
+                    {detailMovie?.movie.actor.map((item, index) => {
+                      return <span key={index}>{item},</span>;
+                    })}
+                  </span>
+                </p>
+                <p>
+                  Năm phát hành :
+                  <span className="ml-1 text-white font-medium">
+                    {detailMovie?.movie.year}
+                  </span>
+                </p>
+                <p>
+                  Lượt xem :
+                  <span className="ml-1 text-white font-medium">
+                    {detailMovie?.movie.view}
+                  </span>
+                </p>
+                <p>
+                  Thời lượng :
+                  <span className="ml-1 text-white font-medium">
+                    {detailMovie?.movie.time}
+                  </span>
+                </p>
+                <p>
+                  Thể loại :
+                  <span className="ml-1 text-white font-medium">
+                    {detailMovie?.movie.lang}
+                  </span>
+                </p>
+                <p>
+                  Full :
+                  <span className="ml-1 text-white font-medium">
+                    {detailMovie?.movie.episode_current}
+                  </span>
+                  <span className="mx-1">/</span>
+                  <span className="ml-1 text-white font-medium">
+                    {detailMovie?.movie.episode_current}
+                  </span>
+                </p>
+              </div>
             </div>
-            <div className="ml-5 text-start text-red-500 leading-7">
-              <h2 className="text-white font-semibold text-2xl">
-                {detailMovie?.movie.name}
-              </h2>
-              <p>
-                Diễn viên :
-                <span className="ml-1 text-white font-medium">
-                  {detailMovie?.movie.actor.map((item, index) => {
-                    return <span key={index}>{item},</span>;
-                  })}
-                </span>
-              </p>
-              <p>
-                Năm phát hành :
-                <span className="ml-1 text-white font-medium">
-                  {detailMovie?.movie.year}
-                </span>
-              </p>
-              <p>
-                Lượt xem :
-                <span className="ml-1 text-white font-medium">
-                  {detailMovie?.movie.view}
-                </span>
-              </p>
-              <p>
-                Thời lượng :
-                <span className="ml-1 text-white font-medium">
-                  {detailMovie?.movie.time}
-                </span>
-              </p>
-              <p>
-                Thể loại :
-                <span className="ml-1 text-white font-medium">
-                  {detailMovie?.movie.lang}
-                </span>
-              </p>
-              <p>
-                Full :
-                <span className="ml-1 text-white font-medium">
-                  {detailMovie?.movie.episode_current}
-                </span>
-                <span className="mx-1">/</span>
-                <span className="ml-1 text-white font-medium">
-                  {detailMovie?.movie.episode_current}
-                </span>
-              </p>
+            <div>
+              <div>{renderButtonChapFilm()}</div>
             </div>
           </div>
+
+          <div className="col-span-1"></div>
         </div>
-        <div>
-          <div>{renderButtonChapFilm()}</div>
-        </div>
+        <div></div>
       </div>
 
       <Footer />
