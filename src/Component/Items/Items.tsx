@@ -22,6 +22,8 @@ export default function Items({ id, thumb_url, name, year, slug }: Props) {
           src={`http://img.ophim1.com/uploads/movies/${thumb_url}`}
           alt={name}
           className="w-full h-[360px] rounded-md  object-cover"
+          // width={0}
+          // height={0}
         />
         <div className={`absolute  left-0 bottom-0 px-5 font-bold text-white`}>
           <h2 className="text-start leading-7">{name}</h2>

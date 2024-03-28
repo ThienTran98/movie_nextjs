@@ -98,7 +98,6 @@ export default function Detail({}: Props) {
     }
   }, [params?.detailId]);
   const handleChangeChap = (item: isDataSever, index: number) => {
-    console.log("item: ", item);
     setIsActive(index);
     setLinkEpisoder(item.link_embed);
   };
@@ -160,6 +159,8 @@ export default function Detail({}: Props) {
                 <img
                   src={`${detailMovie?.movie.poster_url}`}
                   alt="image"
+                  // width={0}
+                  // height={0}
                   className="rounded-lg shadow-xl min-w-[280px] max-w-[280px]  h-[360px] object-cover"
                 />
               </div>
