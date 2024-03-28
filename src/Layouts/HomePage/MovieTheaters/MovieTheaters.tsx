@@ -1,6 +1,6 @@
 "use client";
 import Items from "@/Component/Items/Items";
-import { getListMoviePageDetail } from "@/Services/moviesServices";
+import { getListMoviePage5 } from "@/Services/moviesServices";
 import React, { useEffect, useState } from "react";
 
 type Props = {};
@@ -21,7 +21,7 @@ interface isFeatureMovie {
 export default function MovieTheaters({}: Props) {
   const [movieList, setMovieList] = useState([]);
   useEffect(() => {
-    getListMoviePageDetail()
+    getListMoviePage5()
       .then((res) => {
         setMovieList(res.data.items);
       })
@@ -53,7 +53,7 @@ export default function MovieTheaters({}: Props) {
           Xem thêm
         </button>
       </div>
-      <div className="pt-5 pb-3 grid grid-cols-5 gap-2">
+      <div className="pt-5 pb-3 grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 md:gap-1 lg:gap-2 gap-1">
         {renderFeatureMovie()}
       </div>
     </div>

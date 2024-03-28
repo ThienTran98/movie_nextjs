@@ -4,13 +4,16 @@ import { DataNavBar } from "@/FetchData/DataNavBar/DataNavBar";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 
 type Props = {};
 
 export default function Header({}: Props) {
-  const [isOpenSubList, setIsOpenSubList] = useState(false);
-  const [isOpenSubCountry, setIsOpenSubCountry] = useState(false);
+  const [isOpenSubList, setIsOpenSubList] = useState<boolean>(false);
+  const [isOpenSubCountry, setIsOpenSubCountry] = useState<boolean>(false);
+  const router = useRouter();
+  const [valueSearch, setValueSearch] = useState<string>("");
 
   const renderNavBar = () => {
     return DataNavBar.map((item, index) => {
@@ -103,6 +106,17 @@ export default function Header({}: Props) {
       );
     });
   };
+  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValueSearch(e.target.value);
+  };
+
+  const handleChangePageSearch = () => {
+    if (valueSearch) {
+      router.push(`/search/${valueSearch}`);
+    } else {
+      return false;
+    }
+  };
   const handleOpenModal = (item: string) => {
     switch (item) {
       case "Thể Loại":
@@ -123,15 +137,19 @@ export default function Header({}: Props) {
     <div className=" bg-[#1e293b]">
       <div className="flex items-center justify-between px-6 py-8">
         <div className="flex items-center">
-          <Image
-            src="/img/logo-ophim-6.png"
-            alt="logo"
-            width={150}
-            height={40}
-            className="mr-4"
-          />
+          <Link href="/">
+            {" "}
+            <Image
+              src="/img/logo-ophim-6.png"
+              alt="logo"
+              width={150}
+              height={40}
+              className="mr-4"
+            />
+          </Link>
           <div className="flex items-center px-4 py-3 border-solid border-2 rounded-3xl">
             <svg
+              onClick={handleChangePageSearch}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -149,6 +167,9 @@ export default function Header({}: Props) {
               type="text "
               placeholder="Tìm kiếm phim ..."
               className="outline-none ml-2 border-slate-700 focus:text-white bg-[#1e293b] text-blue-400"
+              onChange={(e) => {
+                handleChangeValue(e);
+              }}
             />
           </div>
         </div>
