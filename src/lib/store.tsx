@@ -1,3 +1,4 @@
+import loadingSlice from "@/redux/loadingSlice";
 import movieSlice from "@/redux/movieSlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
@@ -6,6 +7,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 export const store = configureStore({
   reducer: combineReducers({
     listMoviesReducer: movieSlice,
+    loadingReducer: loadingSlice,
   }),
 });
 

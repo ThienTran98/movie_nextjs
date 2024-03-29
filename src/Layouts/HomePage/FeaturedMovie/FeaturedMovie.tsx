@@ -20,10 +20,10 @@ interface isFeatureMovie {
   _id: string;
 }
 export default function FeaturedMovie({}: Props) {
-  const router = useRouter();
-
+  
   const [movieList, setMovieList] = useState<isFeatureMovie[]>([]);
-
+  
+  const router = useRouter();
   const handleNavigate = () => {
     router.push("/xem-chi-tiet");
   };
@@ -63,7 +63,7 @@ export default function FeaturedMovie({}: Props) {
           Xem thêm
         </button>
       </div>
-      <div className="pt-5 pb-3 grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 md:gap-1 lg:gap-2 gap-1">
+      <div className="pt-5 pb-3 grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 md:gap-1 lg:gap-2 gap-1">
         {renderFeatureMovie()}
       </div>
     </div>

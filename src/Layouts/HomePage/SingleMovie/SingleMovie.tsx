@@ -1,6 +1,7 @@
 "use client";
 import Items from "@/Component/Items/Items";
 import { getListMoviePage7 } from "@/Services/moviesServices";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 type Props = {};
@@ -20,6 +21,8 @@ interface isFeatureMovie {
 }
 export default function SingleMovie({}: Props) {
   const [movieList, setMovieList] = useState([]);
+  const router = useRouter();
+
   useEffect(() => {
     getListMoviePage7()
       .then((res) => {
@@ -29,7 +32,9 @@ export default function SingleMovie({}: Props) {
         console.log("err: ", err);
       });
   }, []);
-
+  const handleNavigate = () => {
+    router.push("/xem-chi-tiet");
+  };
   const renderFeatureMovie = () => {
     return movieList.slice(8, 13).map((item: isFeatureMovie) => {
       return (
@@ -49,11 +54,14 @@ export default function SingleMovie({}: Props) {
         <h2 className="text-white font-semibold text-xl px-2 h-full border-solid border-l-[3px] border-l-white">
           Phim lẻ mới cập nhật
         </h2>
-        <button className="text-white font-semibold text-sm p-2 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl  focus:outline-none   hover:transition-all hover:opacity-90 rounded-lg  text-center ">
+        <button
+          onClick={handleNavigate}
+          className="text-white font-semibold text-sm p-2 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl  focus:outline-none   hover:transition-all hover:opacity-90 rounded-lg  text-center "
+        >
           Xem thêm
         </button>
       </div>
-      <div className="pt-5 pb-3 grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 md:gap-1 lg:gap-2 gap-1">
+      <div className="pt-5 pb-3 grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 md:gap-1 lg:gap-2 gap-1">
         {renderFeatureMovie()}
       </div>
     </div>

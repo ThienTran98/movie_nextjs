@@ -6,8 +6,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Items from "@/Component/Items/Items";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { setListMovie } from "@/redux/movieSlice";
 
 type Props = {};
 type modified = {
@@ -24,17 +22,12 @@ interface IsBanner {
   _id: string;
 }
 export default function Banner({}: Props) {
-  // const [banner, setBanner] = useState<IsBanner[]>([]);
-  const dispatch = useAppDispatch();
-  const listMovieState = useAppSelector((state) => {
-    return state.listMoviesReducer.listMovie;
-  });
-  // setBanner(listMovieState);
+  const [banner, setBanner] = useState<IsBanner[]>([]);
+
   useEffect(() => {
     getListMovieAll()
       .then((res) => {
-        // setBanner(res.data.items);
-        dispatch(setListMovie(res.data.items));
+        setBanner(res.data.items);
       })
       .catch((err) => {
         console.log("err: ", err);
@@ -100,7 +93,7 @@ export default function Banner({}: Props) {
     ],
   };
   const renderBanner = () => {
-    return listMovieState.map((item: IsBanner, index) => {
+    return banner.map((item: IsBanner, index) => {
       return (
         <Items
           key={index}

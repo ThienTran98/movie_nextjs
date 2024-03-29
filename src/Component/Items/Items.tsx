@@ -14,21 +14,21 @@ type Props = {
 
 export default function Items({ id, thumb_url, name, year, slug }: Props) {
   return (
-    <div>
+    <div className="">
       <div
-        className={`pr-1 md:pr-0 sm:pr-0  ${styles["items_container"]} relative rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear`}
+        className={`pr-1 md:pr-0 sm:pr-0 ${styles["items_container"]} relative rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear`}
       >
         <img
           src={`http://img.ophim1.com/uploads/movies/${thumb_url}`}
           alt={name}
-          className="lg:w-full lg:h-[360px] md:w-[220px] md:h-[360px] w-full h-[360px] rounded-md  object-cover"
+          className="lg:w-full lg:h-[360px] md:w-full md:h-[360px] w-full h-[360px] rounded-md  object-cover"
         />
         <div className={`absolute  left-0 bottom-0 px-5 font-bold text-white`}>
           <h2 className="text-start leading-7">{name}</h2>
           <p className="text-start leading-7">{year}</p>
         </div>
         <div
-          className={`absolute  right-1 bottom-0 font-medium text-white bg-blue-500 rounded-br-md`}
+          className={`absolute  right-1   bottom-0 font-medium text-white bg-blue-500 rounded-br-md`}
         >
           <h2 className="text-end px-1 py-2 text-sm">HD VIETSUB</h2>
         </div>

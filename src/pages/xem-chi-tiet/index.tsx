@@ -26,6 +26,7 @@ export default function DetailPage({}: Props) {
   const [listMovieAll, setListMovieAll] = useState<IsItemsMovie[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [resize, setResize] = useState<number>(1025);
   const handleChange = (e: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
   };
@@ -40,6 +41,17 @@ export default function DetailPage({}: Props) {
       });
   }, [currentPage]);
 
+  // resize
+  useEffect(() => {
+    const handleResize = () => {
+      setResize(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const renderListItemsMovie = () => {
     return listMovieAll.map((item: IsItemsMovie, index: number) => {
       return (
@@ -53,38 +65,37 @@ export default function DetailPage({}: Props) {
       );
     });
   };
-
   return (
     <div>
       <Header />
-      <h2 className="text-white font-bold text-xl text-center py-3 ">
+      <h2 className="text-white font-bold text-xl text-center py-5 ">
         Phim mới
       </h2>
-      <Suspense fallback={<Loading />}>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-1">
-          {renderListItemsMovie()}
-        </div>
-        <div className="flex items-center justify-center text-white py-5">
-          <Pagination
-            count={totalPages}
-            variant="outlined"
-            color="secondary"
-            sx={{
-              "Button.MuiPaginationItem-circular.Mui-selected": {
-                color: "#9c27b0",
-                bgcolor: "#9c27b0",
-                fontWeight: "bold",
-              },
-              "Button.MuiButtonBase-root.MuiPaginationItem-root": {
-                bgcolor: "#fafafa",
-              },
-            }}
-            page={currentPage}
-            size="large"
-            onChange={(e, page) => handleChange(e, page)}
-          />
-        </div>
-      </Suspense>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-1">
+        {renderListItemsMovie()}
+      </div>
+      <div className="flex items-center justify-center text-white py-5">
+        <Pagination
+          count={totalPages}
+          variant="outlined"
+          color="secondary"
+          sx={{
+            "Button.MuiPaginationItem-circular.Mui-selected": {
+              color: "#9c27b0",
+              bgcolor: "#9c27b0",
+              fontWeight: "bold",
+            },
+            "Button.MuiButtonBase-root.MuiPaginationItem-root": {
+              bgcolor: "#fafafa",
+            },
+          }}
+          size={resize > 1024 ? "large" : "medium"}
+          page={currentPage}
+          onChange={(e, page) => handleChange(e, page)}
+        />
+      </div>
+
       <Footer />
     </div>
   );

@@ -4,7 +4,7 @@ import React from "react";
 
 type Props = {};
 
-export default function SeriesPage({}: Props) {
+export default function ComingSoon({}: Props) {
   return (
     <div>
       <Header />

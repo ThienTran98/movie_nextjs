@@ -2,8 +2,9 @@
 import Footer from "@/Component/Footer/Footer";
 import Header from "@/Component/Header/Header";
 
-import { getDetailMovie } from "@/Services/moviesServices";
-import { useAppSelector } from "@/lib/hooks";
+import { getDetailMovie, getListMovieAll } from "@/Services/moviesServices";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { setListMovie } from "@/redux/movieSlice";
 import moment from "moment";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -94,6 +95,7 @@ export default function Detail({}: Props) {
   const listMovieSuggest = useAppSelector((state) => {
     return state.listMoviesReducer.listMovie;
   });
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (params) {
@@ -106,6 +108,16 @@ export default function Detail({}: Props) {
         });
     }
   }, [params?.detailId]);
+
+  useEffect(() => {
+    getListMovieAll()
+      .then((res) => {
+        dispatch(setListMovie(res.data.items));
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  }, []);
   const handleChangeChap = (item: isDataSever, index: number) => {
     setIsActive(index);
     setLinkEpisoder(item.link_embed);
@@ -163,8 +175,9 @@ export default function Detail({}: Props) {
                 : `${detailMovie?.episodes[1]?.server_data[0].link_embed}`
             }
             allowFullScreen
+            loading={"lazy"}
             // autoplay;
-            allow=" fullscreen; picture-in-picture; web-share"
+            allow="  fullscreen; picture-in-picture; web-share"
           ></iframe>
           {renderServerName()}
           <div className="text-white font-semibold my-3">Chọn tập phim :</div>
@@ -229,7 +242,7 @@ export default function Detail({}: Props) {
           onClick={() => {
             handleChangePath(item.slug);
           }}
-          className="flex p-2 bg-black/45 cursor-pointer hover:bg-black/70"
+          className="flex p-2 bg-black/45 cursor-pointer hover:bg-black/70 hover:transition-all"
         >
           <div>
             <img
@@ -238,7 +251,7 @@ export default function Detail({}: Props) {
               className="w-24 h-20 object-cover rounded-md"
             />
           </div>
-          <div className="pl-8 text-white">
+          <div className="pl-4 md:pl-4 lg:pl-8 text-white">
             <h2 className="font-bold leading-7 text-base">{item.name}</h2>
             <p>{item.year}</p>
           </div>
@@ -249,12 +262,11 @@ export default function Detail({}: Props) {
   const handleChangePath = (item: string) => {
     router.push(`/xem-chi-tiet/${item}`);
   };
-
   return (
     <div>
       <Header />
       <div className="py-5 px-10">
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-col-1 lg:grid-cols-3">
           <div className="col-span-2">
             <div className="flex items-center ">
               <div>
@@ -269,45 +281,45 @@ export default function Detail({}: Props) {
                   {detailMovie?.movie?.name}
                 </h2>
 
-                <p>
+                <p className="leading-9">
                   Quốc gia :
-                  <span className="ml-1 text-white font-medium">
+                  <span className="ml-1 text-white font-medium ">
                     {detailMovie?.movie?.country.map((item, index) => {
                       return <span key={index}>{item.name}</span>;
                     })}
                   </span>
                 </p>
-                <p>
+                <p className="leading-9">
                   Năm phát hành :
                   <span className="ml-1 text-white font-medium">
                     {detailMovie?.movie?.year}
                   </span>
                 </p>
-                <p>
+                <p className="leading-9">
                   Ngày phát hành :
                   <span className="ml-1 text-white font-medium">
                     {moment(`${detailMovie?.movie?.created.time}`).format("LL")}
                   </span>
                 </p>
-                <p>
+                <p className="leading-9">
                   Lượt xem :
                   <span className="ml-1 text-white font-medium">
                     {detailMovie?.movie?.view}
                   </span>
                 </p>
-                <p>
+                <p className="leading-9">
                   Thời lượng :
                   <span className="ml-1 text-white font-medium">
                     {detailMovie?.movie?.time}
                   </span>
                 </p>
-                <p>
+                <p className="leading-9">
                   Thể loại :
                   <span className="ml-1 text-white font-medium">
                     {detailMovie?.movie?.lang}
                   </span>
                 </p>
-                <p>
+                <p className="leading-9">
                   Full :<span className="ml-2"></span>
                   <button className=" relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
                     <span className="relative px-3 py-2 md:px-3 md:py-2 lg:px-4 lg:py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -340,11 +352,14 @@ export default function Detail({}: Props) {
               </p>
             </div>
           </div>
-          <div className="col-span-1 pl-8">
-            <h2 className="lg:text-base md:text-sm text-xs font-bold px-2 py-3 text-white mb-3">
+          <div className="col-span-1 ">
+            <h2 className=" mt-4 md:mt-5 lg:mt-0 lg:text-base md:text-sm text-xs font-bold px-2 py-1 text-white mb-3 border-l-2 border-solid divide-white">
               Phim đề xuất :
             </h2>
-            <div className="h-[700px] overflow-y-scroll" id="movie_suggest">
+            <div
+              className="h-[400px] md:h-[500px] lg:h-[700px]  overflow-y-scroll"
+              id="movie_suggest"
+            >
               {renderListMovieSuggest()}
             </div>
           </div>

@@ -147,7 +147,7 @@ export default function Header({}: Props) {
               className="mr-4"
             />
           </Link>
-          <div className="flex items-center px-4 py-3 border-solid border-2 rounded-3xl">
+          <div className="hidden md:flex lg:flex items-center px-4 py-3 border-solid border-2 rounded-3xl">
             <svg
               onClick={handleChangePageSearch}
               xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +173,26 @@ export default function Header({}: Props) {
             />
           </div>
         </div>
-        <ul className="flex items-center">{renderNavBar()}</ul>
+        <div className="block md:block lg:hidden">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#000000"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="#fff"
+            className="w-14 h-14"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </div>
+
+        <ul className=" items-center hidden md:hidden lg:flex ">
+          {renderNavBar()}
+        </ul>
       </div>
     </div>
   );
