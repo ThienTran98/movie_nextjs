@@ -20,7 +20,7 @@ const renderSubListMovie = () => {
         return (
           <li
             key={_index}
-            className="hover:opacity-80 hover:transition-all hover:text-white leading-9"
+            className="hover:opacity-80 hover:transition-all hover:text-white leading-9 text-sm md:text-base lg:text-base"
           >
             <Link href={_item.path}>{_item.title}</Link>
           </li>
@@ -36,7 +36,7 @@ const renderSubListCountry = () => {
         return (
           <li
             key={_index}
-            className="hover:opacity-80 hover:transition-all hover:text-white leading-9"
+            className="hover:opacity-80 hover:transition-all hover:text-white leading-9 text-sm md:text-base lg:text-base"
           >
             <Link href={_item.path}>{_item.title}</Link>
           </li>
@@ -56,7 +56,7 @@ export default function Footer({}: Props) {
             height={80}
             alt="logo"
           />
-          <h2 className="text-white font-medium leading-7 py-4 text-justify">
+          <h2 className="text-white font-medium leading-7 py-4 text-justify text-sm md:text-base lg:text-base">
             OPhim.TV - Trang xem phim Online với giao diện mới được bố trí và
             thiết kế thân thiện với người dùng. Nguồn phim được tổng hợp từ các
             website lớn với đa dạng các đầu phim và thể loại vô cùng phong phú.
@@ -64,32 +64,38 @@ export default function Footer({}: Props) {
         </div>
         <div className="grid grid-cols-3 gap-5">
           <div className=" font-medium text-blue-500">
-            <h2 className="text-xl font-bold text-white">Phim mới</h2>
+            <h2 className="text-sm md:text-base lg:text-xl font-bold text-white">
+              Phim mới
+            </h2>
             <ul className=" mt-3 ">{renderSubListMovie()}</ul>
           </div>
           <div className=" font-medium text-blue-500">
-            <h2 className="text-xl font-bold text-white">Phim hay</h2>
+            <h2 className="text-sm md:text-base lg:text-xl font-bold text-white">
+              Phim hay
+            </h2>
             <ul className=" mt-3 ">{renderSubListCountry()}</ul>
           </div>
           <div className=" font-medium text-blue-500">
-            <h2 className="text-xl font-bold text-white">Thông tin </h2>
+            <h2 className="text-sm md:text-base lg:text-xl font-bold text-white">
+              Thông tin
+            </h2>
             <ul className=" mt-3 ">
-              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9">
+              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9 text-sm md:text-base lg:text-base">
                 <Link href="#">Giới thiệu</Link>
               </li>
-              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9">
+              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9 text-sm md:text-base lg:text-base">
                 <Link href="#">Liên hệ chúng tôi</Link>
               </li>
-              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9">
+              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9 text-sm md:text-base lg:text-base">
                 <Link href="#">Điều khoản sử dụng</Link>
               </li>
-              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9">
+              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9 text-sm md:text-base lg:text-base">
                 <Link href="#">Chính sách riêng tư</Link>
               </li>
-              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9">
+              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9 text-sm md:text-base lg:text-base">
                 <Link href="#">Khiếu nại bản quyền</Link>
               </li>
-              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9">
+              <li className="hover:opacity-80 hover:transition-all hover:text-white leading-9 text-sm md:text-base lg:text-base">
                 <Link href="#"></Link>
               </li>
             </ul>

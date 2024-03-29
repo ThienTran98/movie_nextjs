@@ -16,17 +16,24 @@ export default function HomePage({}: Props) {
     <div className="">
       <Header />
 
-      <Banner />
-
-      <FeaturedMovie />
-
-      <MovieTheaters />
-
-      <SeriesMovie />
-
-      <SingleMovie />
-
-      <News />
+      <Suspense fallback={""}>
+        <Banner />
+      </Suspense>
+      <Suspense fallback={""}>
+        <FeaturedMovie />
+      </Suspense>
+      <Suspense fallback={""}>
+        <MovieTheaters />
+      </Suspense>
+      <Suspense fallback={""}>
+        <SeriesMovie />
+      </Suspense>
+      <Suspense fallback={""}>
+        <SingleMovie />
+      </Suspense>
+      <Suspense fallback={""}>
+        <News />
+      </Suspense>
 
       <Footer />
     </div>

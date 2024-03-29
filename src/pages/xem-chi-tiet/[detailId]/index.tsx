@@ -9,6 +9,7 @@ import moment from "moment";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { Fragment, useEffect, useState } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 type Props = {};
 
@@ -123,28 +124,29 @@ export default function Detail({}: Props) {
   };
   const renderButtonChapFilm = () => {
     if (detailMovie?.episodes[0]?.server_name === changeSever) {
-      console.log("linkEpisoder: ", linkEpisoder);
-      console.log(
-        "detailMovie?.episodes[0].server_data[0].link_embed: ",
-        detailMovie?.episodes[0].server_data[0].link_embed
-      );
-
       return (
         <Fragment>
-          <div className="aspect-w-16 aspect-h-9">
-            <iframe
-              src={
-                linkEpisoder
-                  ? linkEpisoder
-                  : `${detailMovie?.episodes[0].server_data[0].link_embed}`
-              }
-              width="100%"
-              height={400}
-              frameBorder={0}
-              allow="autoplay; fullscreen; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
+          {linkEpisoder ||
+          `${detailMovie?.episodes[0].server_data[0].link_embed}` ? (
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                src={
+                  linkEpisoder
+                    ? linkEpisoder
+                    : `${detailMovie?.episodes[0].server_data[0].link_embed}`
+                }
+                width="100%"
+                height={400}
+                frameBorder={0}
+                allow="autoplay; fullscreen; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          ) : (
+            <SkeletonTheme baseColor="#f7f7f7" highlightColor="#ccc">
+              <Skeleton className="w-full h-[400px]" />
+            </SkeletonTheme>
+          )}
           {renderServerName()}
           <div className="text-white font-semibold my-3">Chọn tập phim :</div>
           <div className="">
@@ -173,20 +175,28 @@ export default function Detail({}: Props) {
     } else {
       return (
         <Fragment>
-          <div className="aspect-w-16 aspect-h-9">
-            <iframe
-              src={
-                linkEpisoder
-                  ? linkEpisoder
-                  : `${detailMovie?.episodes[1].server_data[0].link_embed}`
-              }
-              width="100%"
-              height={400}
-              frameBorder={0}
-              allow="autoplay; fullscreen; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
+          {linkEpisoder ||
+          detailMovie?.episodes[1].server_data[0].link_embed ? (
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                src={
+                  linkEpisoder
+                    ? linkEpisoder
+                    : `${detailMovie?.episodes[1].server_data[0].link_embed}`
+                }
+                width="100%"
+                height={400}
+                frameBorder={0}
+                allow="autoplay; fullscreen; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          ) : (
+            <SkeletonTheme baseColor="#f7f7f7" highlightColor="#ccc">
+              <Skeleton className="w-full h-[400px]" />
+            </SkeletonTheme>
+          )}
+
           {renderServerName()}
           <div className="text-white font-semibold my-3">Chọn tập phim :</div>
           <div className="">
@@ -253,11 +263,22 @@ export default function Detail({}: Props) {
           className="flex p-2 bg-black/45 cursor-pointer hover:bg-black/70 hover:transition-all"
         >
           <div>
-            <img
+            {item.poster_url ? (
+              <img
+                src={`http://img.ophim1.com/uploads/movies/${item.poster_url}`}
+                alt="poster"
+                className="w-24 h-20 object-cover rounded-md"
+              />
+            ) : (
+              <SkeletonTheme baseColor="#f7f7f7" highlightColor="#ccc">
+                <Skeleton className="w-24 h-20 object-cover rounded-md" />
+              </SkeletonTheme>
+            )}
+            {/* <img
               src={`http://img.ophim1.com/uploads/movies/${item.poster_url}`}
               alt="poster"
               className="w-24 h-20 object-cover rounded-md"
-            />
+            /> */}
           </div>
           <div className="pl-4 md:pl-4 lg:pl-8 text-white">
             <h2 className="font-bold leading-7 text-base">{item.name}</h2>
@@ -278,17 +299,22 @@ export default function Detail({}: Props) {
           <div className="col-span-2">
             <div className="flex flex-col  md:flex-row lg:flex-row items-center ">
               <div>
-                <img
-                  src={`${detailMovie?.movie?.poster_url}`}
-                  alt="image"
-                  className="rounded-lg shadow-xl min-w-[280px] max-w-[280px] h-[360px] object-cover"
-                />
+                {`${detailMovie?.movie?.poster_url}` ? (
+                  <img
+                    src={`${detailMovie?.movie?.poster_url}`}
+                    alt="image"
+                    className="rounded-lg shadow-xl min-w-[280px] max-w-[280px] h-[360px] object-cover"
+                  />
+                ) : (
+                  <SkeletonTheme baseColor="#f7f7f7" highlightColor="#ccc">
+                    <Skeleton />
+                  </SkeletonTheme>
+                )}
               </div>
               <div className="ml-5 text-start text-red-500 flex flex-col justify-between items-baseline leading-8">
-                <h2 className="text-white font-semibold text-2xl leading-8 mb-5">
+                <h2 className="text-white font-semibold text-2xl leading-8 mb-5 mt-4 md:mt-0 lg:mt-0">
                   {detailMovie?.movie?.name}
                 </h2>
-
                 <p className="leading-9">
                   Quốc gia :
                   <span className="ml-1 text-white font-medium ">
