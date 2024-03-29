@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiPlayCircle } from "react-icons/bi";
 import styles from "./Items.module.css";
 import Link from "next/link";
@@ -15,9 +15,20 @@ type Props = {
 };
 
 export default function Items({ id, thumb_url, name, year, slug }: Props) {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
   return (
     <div className="">
-      {thumb_url && name && year && slug ? (
+      {!isLoading ? (
         <div
           className={`pr-1 md:pr-0 sm:pr-0 ${styles["items_container"]} relative rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear`}
         >

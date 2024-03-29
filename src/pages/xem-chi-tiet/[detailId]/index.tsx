@@ -92,6 +92,18 @@ export default function Detail({}: Props) {
   const [isActive, setIsActive] = useState<number>(0);
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   const listMovieSuggest = useAppSelector((state) => {
     return state.listMoviesReducer.listMovie;
   });
@@ -126,8 +138,7 @@ export default function Detail({}: Props) {
     if (detailMovie?.episodes[0]?.server_name === changeSever) {
       return (
         <Fragment>
-          {linkEpisoder ||
-          `${detailMovie?.episodes[0].server_data[0].link_embed}` ? (
+          {!isLoading ? (
             <div className="aspect-w-16 aspect-h-9">
               <iframe
                 src={
@@ -175,8 +186,7 @@ export default function Detail({}: Props) {
     } else {
       return (
         <Fragment>
-          {linkEpisoder ||
-          detailMovie?.episodes[1].server_data[0].link_embed ? (
+          {isLoading ? (
             <div className="aspect-w-16 aspect-h-9">
               <iframe
                 src={
@@ -263,7 +273,7 @@ export default function Detail({}: Props) {
           className="flex p-2 bg-black/45 cursor-pointer hover:bg-black/70 hover:transition-all"
         >
           <div>
-            {item.poster_url ? (
+            {!isLoading ? (
               <img
                 src={`http://img.ophim1.com/uploads/movies/${item.poster_url}`}
                 alt="poster"
@@ -299,7 +309,7 @@ export default function Detail({}: Props) {
           <div className="col-span-2">
             <div className="flex flex-col  md:flex-row lg:flex-row items-center ">
               <div>
-                {`${detailMovie?.movie?.poster_url}` ? (
+                {!isLoading ? (
                   <img
                     src={`${detailMovie?.movie?.poster_url}`}
                     alt="image"
