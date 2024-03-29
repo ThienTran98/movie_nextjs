@@ -47,8 +47,8 @@ const renderSubListCountry = () => {
 };
 export default function Footer({}: Props) {
   return (
-    <div className="pt-2 px-8">
-      <div className="grid grid-cols-2 gap-5 border-y border-solid border-y-rose-800 py-8 ">
+    <div className="pt-2 px-2 md:px-8 lg:px-8 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 border-y border-solid border-y-rose-800 py-8 ">
         <div>
           <Image
             src="/img/logo-ophim-6.png"

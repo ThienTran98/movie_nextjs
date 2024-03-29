@@ -9,7 +9,6 @@ import moment from "moment";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { Fragment, useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 
 type Props = {};
 
@@ -124,20 +123,28 @@ export default function Detail({}: Props) {
   };
   const renderButtonChapFilm = () => {
     if (detailMovie?.episodes[0]?.server_name === changeSever) {
+      console.log("linkEpisoder: ", linkEpisoder);
+      console.log(
+        "detailMovie?.episodes[0].server_data[0].link_embed: ",
+        detailMovie?.episodes[0].server_data[0].link_embed
+      );
+
       return (
         <Fragment>
-          <iframe
-            frameBorder={0}
-            className="w-full h-[400px]"
-            src={
-              linkEpisoder
-                ? linkEpisoder
-                : `${detailMovie?.episodes[0].server_data[0].link_embed}`
-            }
-            allowFullScreen
-            //
-            allow=" fullscreen;  autoplay; picture-in-picture; web-share"
-          ></iframe>
+          <div className="aspect-w-16 aspect-h-9">
+            <iframe
+              src={
+                linkEpisoder
+                  ? linkEpisoder
+                  : `${detailMovie?.episodes[0].server_data[0].link_embed}`
+              }
+              width="100%"
+              height={400}
+              frameBorder={0}
+              allow="autoplay; fullscreen; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
           {renderServerName()}
           <div className="text-white font-semibold my-3">Chọn tập phim :</div>
           <div className="">
@@ -166,19 +173,20 @@ export default function Detail({}: Props) {
     } else {
       return (
         <Fragment>
-          <iframe
-            frameBorder={0}
-            className="w-full h-[400px]"
-            src={
-              linkEpisoder
-                ? linkEpisoder
-                : `${detailMovie?.episodes[1]?.server_data[0].link_embed}`
-            }
-            allowFullScreen
-            loading={"lazy"}
-            // autoplay;
-            allow="  fullscreen; picture-in-picture; web-share"
-          ></iframe>
+          <div className="aspect-w-16 aspect-h-9">
+            <iframe
+              src={
+                linkEpisoder
+                  ? linkEpisoder
+                  : `${detailMovie?.episodes[1].server_data[0].link_embed}`
+              }
+              width="100%"
+              height={400}
+              frameBorder={0}
+              allow="autoplay; fullscreen; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
           {renderServerName()}
           <div className="text-white font-semibold my-3">Chọn tập phim :</div>
           <div className="">
@@ -265,15 +273,15 @@ export default function Detail({}: Props) {
   return (
     <div>
       <Header />
-      <div className="py-5 px-10">
+      <div className="py-5 px-2 md:px-8 lg:px-10">
         <div className="grid grid-cols-1 md:grid-col-1 lg:grid-cols-3">
           <div className="col-span-2">
-            <div className="flex items-center ">
+            <div className="flex flex-col  md:flex-row lg:flex-row items-center ">
               <div>
                 <img
                   src={`${detailMovie?.movie?.poster_url}`}
                   alt="image"
-                  className="rounded-lg shadow-xl min-w-[280px] max-w-[280px]  h-[360px] object-cover"
+                  className="rounded-lg shadow-xl min-w-[280px] max-w-[280px] h-[360px] object-cover"
                 />
               </div>
               <div className="ml-5 text-start text-red-500 flex flex-col justify-between items-baseline leading-8">
