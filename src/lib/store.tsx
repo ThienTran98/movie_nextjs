@@ -1,10 +1,11 @@
+import movieSlice from "@/redux/movieSlice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { todo } from "./../redux/createSlice";
+
 // ...
 
 export const store = configureStore({
   reducer: combineReducers({
-    todoReducer: todo,
+    listMoviesReducer: movieSlice,
   }),
 });
 

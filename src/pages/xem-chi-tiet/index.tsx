@@ -26,7 +26,7 @@ export default function DetailPage({}: Props) {
   const [listMovieAll, setListMovieAll] = useState<IsItemsMovie[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const handleChange = (e: any, page: number) => {
+  const handleChange = (e: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
   };
   useEffect(() => {

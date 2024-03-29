@@ -3,9 +3,10 @@ import Footer from "@/Component/Footer/Footer";
 import Header from "@/Component/Header/Header";
 
 import { getDetailMovie } from "@/Services/moviesServices";
+import { useAppSelector } from "@/lib/hooks";
 import moment from "moment";
-import Image from "next/image";
-import { useParams } from "next/navigation";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import React, { Fragment, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 
@@ -85,10 +86,15 @@ interface isDataMovie {
 export default function Detail({}: Props) {
   const params = useParams<detailId>();
   const [detailMovie, setDetailMovie] = useState<isDataMovie>();
-  console.log("detailMovie: ", detailMovie);
   const [linkEpisoder, setLinkEpisoder] = useState<string>("");
   const [changeSever, setChangeSever] = useState<string>("Vietsub #1");
   const [isActive, setIsActive] = useState<number>(0);
+  const router = useRouter();
+
+  const listMovieSuggest = useAppSelector((state) => {
+    return state.listMoviesReducer.listMovie;
+  });
+
   useEffect(() => {
     if (params) {
       getDetailMovie(params?.detailId)
@@ -214,6 +220,36 @@ export default function Detail({}: Props) {
   const handleChangeSever = (changeSever: string) => {
     setChangeSever(changeSever);
   };
+
+  const renderListMovieSuggest = () => {
+    return listMovieSuggest.map((item, index) => {
+      return (
+        <div
+          key={item._id}
+          onClick={() => {
+            handleChangePath(item.slug);
+          }}
+          className="flex p-2 bg-black/45 cursor-pointer hover:bg-black/70"
+        >
+          <div>
+            <img
+              src={`http://img.ophim1.com/uploads/movies/${item.poster_url}`}
+              alt="poster"
+              className="w-24 h-20 object-cover rounded-md"
+            />
+          </div>
+          <div className="pl-8 text-white">
+            <h2 className="font-bold leading-7 text-base">{item.name}</h2>
+            <p>{item.year}</p>
+          </div>
+        </div>
+      );
+    });
+  };
+  const handleChangePath = (item: string) => {
+    router.push(`/xem-chi-tiet/${item}`);
+  };
+
   return (
     <div>
       <Header />
@@ -225,8 +261,6 @@ export default function Detail({}: Props) {
                 <img
                   src={`${detailMovie?.movie?.poster_url}`}
                   alt="image"
-                  // width={0}
-                  // height={0}
                   className="rounded-lg shadow-xl min-w-[280px] max-w-[280px]  h-[360px] object-cover"
                 />
               </div>
@@ -276,13 +310,13 @@ export default function Detail({}: Props) {
                 <p>
                   Full :<span className="ml-2"></span>
                   <button className=" relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
-                    <span className="relative px-4 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    <span className="relative px-3 py-2 md:px-3 md:py-2 lg:px-4 lg:py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                       {detailMovie?.movie?.episode_current}
                     </span>
                   </button>
                   <span className="mx-2">/</span>
                   <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
-                    <span className="relative px-4 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    <span className="relative px-3 py-2 md:px-3 md:py-2 lg:px-4 lg:py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                       {detailMovie?.movie?.episode_current}
                     </span>
                   </button>
@@ -306,8 +340,13 @@ export default function Detail({}: Props) {
               </p>
             </div>
           </div>
-          <div className="col-span-1">
-            <h2>Các bộ phim khác :</h2>
+          <div className="col-span-1 pl-8">
+            <h2 className="lg:text-base md:text-sm text-xs font-bold px-2 py-3 text-white mb-3">
+              Phim đề xuất :
+            </h2>
+            <div className="h-[700px] overflow-y-scroll" id="movie_suggest">
+              {renderListMovieSuggest()}
+            </div>
           </div>
         </div>
       </div>

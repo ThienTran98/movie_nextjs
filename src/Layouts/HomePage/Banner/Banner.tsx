@@ -6,6 +6,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Items from "@/Component/Items/Items";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { setListMovie } from "@/redux/movieSlice";
 
 type Props = {};
 type modified = {
@@ -22,12 +24,17 @@ interface IsBanner {
   _id: string;
 }
 export default function Banner({}: Props) {
-  const [banner, setBanner] = useState<IsBanner[]>([]);
-
+  // const [banner, setBanner] = useState<IsBanner[]>([]);
+  const dispatch = useAppDispatch();
+  const listMovieState = useAppSelector((state) => {
+    return state.listMoviesReducer.listMovie;
+  });
+  // setBanner(listMovieState);
   useEffect(() => {
     getListMovieAll()
       .then((res) => {
-        setBanner(res.data.items);
+        // setBanner(res.data.items);
+        dispatch(setListMovie(res.data.items));
       })
       .catch((err) => {
         console.log("err: ", err);
@@ -69,7 +76,7 @@ export default function Banner({}: Props) {
           arrows: false,
           infinite: true,
           speed: 1000,
-
+          dots: false,
           autoplaySpeed: 3000,
           autoplay: true,
           cssEase: "linear",
@@ -87,12 +94,13 @@ export default function Banner({}: Props) {
           autoplaySpeed: 3000,
           autoplay: true,
           cssEase: "linear",
+          dots: false,
         },
       },
     ],
   };
   const renderBanner = () => {
-    return banner.map((item: IsBanner, index) => {
+    return listMovieState.map((item: IsBanner, index) => {
       return (
         <Items
           key={index}
