@@ -135,8 +135,8 @@ export default function Detail({}: Props) {
                 : `${detailMovie?.episodes[0].server_data[0].link_embed}`
             }
             allowFullScreen
-            // autoplay;
-            allow=" fullscreen; picture-in-picture; web-share"
+            //
+            allow=" fullscreen;  autoplay; picture-in-picture; web-share"
           ></iframe>
           {renderServerName()}
           <div className="text-white font-semibold my-3">Chọn tập phim :</div>
