@@ -1,6 +1,7 @@
 "use client";
 
 import { DataNavBar } from "@/FetchData/DataNavBar/DataNavBar";
+import { XMarkIcon } from "@heroicons/react/16/solid";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +13,7 @@ type Props = {};
 export default function Header({}: Props) {
   const [isOpenSubList, setIsOpenSubList] = useState<boolean>(false);
   const [isOpenSubCountry, setIsOpenSubCountry] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
   const [valueSearch, setValueSearch] = useState<string>("");
 
@@ -106,6 +108,24 @@ export default function Header({}: Props) {
       );
     });
   };
+
+  const renderNavBarMobile = () => {
+    return DataNavBar.map((item, index) => {
+      return (
+        <li
+          key={index}
+          className={`mx-4 hover:text-blue-400 text-white  text-base md:text-xl  cursor-pointer `}
+        >
+          <Link
+            className=" font-bold block w-full h-full px-5 py-3 "
+            href={item.path ? item.path : ""}
+          >
+            {item.title}
+          </Link>
+        </li>
+      );
+    });
+  };
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueSearch(e.target.value);
   };
@@ -132,13 +152,16 @@ export default function Header({}: Props) {
         break;
     }
   };
+
+  const handleShowNavbar = () => {
+    setShow(!show);
+  };
   return (
     // bg-transparent
     <div className=" bg-[#1e293b]">
       <div className="flex items-center justify-between px-6 py-8">
         <div className="flex items-center">
           <Link href="/">
-            {" "}
             <Image
               src="/img/logo-ophim-6.png"
               alt="logo"
@@ -173,26 +196,42 @@ export default function Header({}: Props) {
             />
           </div>
         </div>
-        <div className="block md:block lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="#000000"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="#fff"
-            className="w-12 h-12"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
+        <div className="block md:block lg:hidden" onClick={handleShowNavbar}>
+          {show ? (
+            <XMarkIcon className="w-12 h-12 text-white" />
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="#fff"
+              className="w-12 h-12"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          )}
         </div>
-
         <ul className=" items-center hidden md:hidden lg:flex ">
           {renderNavBar()}
         </ul>
+      </div>
+
+      <div className=" bg-[#1e293b] pt-4">
+        <div className="w-4/5 h-px bg-red-500 mx-auto "></div>
+      </div>
+      <div
+        className={
+          !show
+            ? "bg-white/20 text-white translate-y-[-150%] hidden py-3"
+            : " text-white animate-show-menu py-3 bg-gradient-to-r from-purple-500 via-purple-900 to-fuchsia-500 "
+        }
+      >
+        <ul>{renderNavBarMobile()}</ul>
       </div>
     </div>
   );

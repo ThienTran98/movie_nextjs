@@ -107,9 +107,6 @@ export default function Banner({}: Props) {
   };
   return (
     <Fragment>
-      <div className="bg-[#1e293b] py-4">
-        <div className="w-4/5 h-px bg-red-500 mx-auto "></div>
-      </div>
       <div className="slider-container pt-5 pb-3 bg-[#1e293b] px-8">
         <Slider {...settings}>{renderBanner()}</Slider>
       </div>

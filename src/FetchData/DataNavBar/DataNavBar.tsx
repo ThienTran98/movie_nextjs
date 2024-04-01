@@ -186,5 +186,5 @@ export const DataNavBar: Array<isDataNavBar> = [
       },
     ],
   },
-  { id: 6, path: "/sap-chieu", title: "Sắp Chiếu" },
+  { id: 7, path: "/sap-chieu", title: "Sắp Chiếu" },
 ];

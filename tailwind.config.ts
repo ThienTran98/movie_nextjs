@@ -9,7 +9,24 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        "show-modals": {
+          "0%": {
+            transform: "translateY(-150%)",
+            opacity: 0,
+          },
+
+          "100%": {
+            transform: "translateY(0%)",
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        "show-menu": "show-modals 1s linear",
+      },
+    },
   },
   plugins: [],
 };

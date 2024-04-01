@@ -20,7 +20,7 @@ export default function Items({ id, thumb_url, name, year, slug }: Props) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 4000);
+    }, 2500);
 
     return () => {
       clearTimeout(timer);
