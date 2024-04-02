@@ -30,7 +30,7 @@ export default function Items({ id, thumb_url, name, year, slug }: Props) {
     <div className="">
       {!isLoading ? (
         <div
-          className={`pr-1 md:pr-0 sm:pr-0 ${styles["items_container"]} relative rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear`}
+          className={`pr-1 md:pr-0 sm:pr-0 ${styles["items_container"]} relative rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear shadow-2xl`}
         >
           <img
             src={`http://img.ophim1.com/uploads/movies/${thumb_url}`}

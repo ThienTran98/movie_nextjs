@@ -1,6 +1,7 @@
 import Footer from "@/Component/Footer/Footer";
 import Header from "@/Component/Header/Header";
-import { getListMovieAll } from "@/Services/moviesServices";
+import Items from "@/Component/Items/Items";
+import { getDetailMovie, getListMovieAll } from "@/Services/moviesServices";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -10,54 +11,48 @@ type isParams = {
   params: string;
 };
 
-type modified = {
-  time: string;
-};
-type isItems = {
-  modified: modified;
-  name: string;
-  origin_name: string;
-  poster_url: string;
-
-  slug: string;
-
-  thumb_url: string;
-
-  year: number;
-  _id: string;
-};
-
-interface isListMovie {
-  items: isItems[];
-  pagination?: string;
-  pathImage?: string;
-  status: boolean;
-}
 export default function SearchParams({}: Props) {
-  const [listMovie, setListMovie] = useState<Partial<isListMovie>>({});
+  const [name, setName] = useState<string>("");
+  const [thumbUrl, setThumbUrl] = useState<string>("");
+  const [id, setId] = useState<string>("");
+  const [year, setYear] = useState<number>(0);
+  const [slug, setSlug] = useState<string>("");
+  const params = useParams<isParams>();
+  const valueSearch = params?.params;
 
   useEffect(() => {
-    getListMovieAll()
+    getDetailMovie(valueSearch)
       .then((res) => {
-        setListMovie(res.data);
+        setName(res.data.movie.name);
+        setThumbUrl(res.data.movie.thumb_url);
+        setId(res.data.movie._id);
+        setYear(res.data.movie.year);
+        setSlug(res.data.movie.slug);
       })
       .catch((err) => {
         console.log("err: ", err);
       });
-  }, []);
-  const params = useParams<isParams>();
-  const valueSearch = params?.params;
+  }, [valueSearch]);
 
-  const listSearchMovie = listMovie?.items?.filter((movie) => {
-    return movie.name.toLowerCase().includes(valueSearch.toLowerCase());
-  });
   return (
     <div>
       <Header />
       <div>
-        <h3 className="text-center font-medium text-white">
+        <h3 className="text-center font-medium text-white mt-5">
           Từ khóa tìm kiếm : {valueSearch}
         </h3>
+
+        <div className="py-10">
+          <div className=" flex items-center justify-center">
+            <Items
+              id={id}
+              thumb_url={thumbUrl}
+              name={name}
+              year={year}
+              slug={slug}
+            />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

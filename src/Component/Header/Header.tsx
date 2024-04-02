@@ -231,7 +231,36 @@ export default function Header({}: Props) {
             : " text-white animate-show-menu py-3 bg-gradient-to-r from-purple-500 via-purple-900 to-fuchsia-500 "
         }
       >
-        <ul>{renderNavBarMobile()}</ul>
+        <ul>
+          {renderNavBarMobile()}
+          <div className="px-4">
+            <div className="flex md:hidden lg:hidden px-2 py-3 items-center border-solid border-2 rounded-xl">
+              <svg
+                onClick={handleChangePageSearch}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-white hover:opacity-80 hover:cursor-pointer focus:text-blue-400"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+              <input
+                type="text "
+                placeholder="Tìm kiếm phim ..."
+                className="outline-none ml-2 text-lg border-slate-700 focus:text-white py-2  text-blue-400 bg-transparent"
+                onChange={(e) => {
+                  handleChangeValue(e);
+                }}
+              />
+            </div>
+          </div>
+        </ul>
       </div>
     </div>
   );
