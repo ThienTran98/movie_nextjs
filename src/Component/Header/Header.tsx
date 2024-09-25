@@ -1,7 +1,7 @@
 "use client";
 
 import { DataNavBar } from "@/FetchData/DataNavBar/DataNavBar";
-import { XMarkIcon } from "@heroicons/react/16/solid";
+import { MoonIcon, XMarkIcon } from "@heroicons/react/16/solid";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +12,7 @@ type Props = {};
 
 export default function Header({}: Props) {
   const [isOpenSubList, setIsOpenSubList] = useState<boolean>(false);
+  const [dark, setDark] = useState<string>("dark");
   const [isOpenSubCountry, setIsOpenSubCountry] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function Header({}: Props) {
           className={
             item.title === "Thể Loại" || item.title === "Quốc Gia"
               ? "mx-4 hover:text-blue-400 text-white flex items-center relative"
-              : "mx-4 hover:text-blue-400 text-white"
+              : "mx-4 hover:text-blue-400 text-white flex items-center"
           }
           onClick={() => {
             handleOpenModal(item.title);
@@ -51,6 +52,12 @@ export default function Header({}: Props) {
                 />
               </svg>
             </Fragment>
+          ) : (
+            <></>
+          )}
+
+          {item.title === "Sắp Chiếu" ? (
+            <MoonIcon className="w-7 h-7 text-white ml-3 cursor-pointer hover:opacity-70 hover:transition-all hover:text-blue-500" />
           ) : (
             <></>
           )}
@@ -158,7 +165,7 @@ export default function Header({}: Props) {
   };
   return (
     // bg-transparent
-    <div className=" bg-[#1e293b]">
+    <div className=" ">
       <div className="flex items-center justify-between px-6 py-8">
         <div className="flex items-center">
           <Link href="/">
@@ -220,7 +227,6 @@ export default function Header({}: Props) {
           {renderNavBar()}
         </ul>
       </div>
-
       <div className=" bg-[#1e293b] pt-4">
         <div className="w-4/5 h-px bg-red-500 mx-auto "></div>
       </div>

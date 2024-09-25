@@ -27,10 +27,10 @@ export default function Items({ id, thumb_url, name, year, slug }: Props) {
     };
   }, []);
   return (
-    <div className="">
+    <div className="relative">
       {!isLoading ? (
         <div
-          className={`pr-1 md:pr-0 sm:pr-0 ${styles["items_container"]} relative rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear shadow-2xl`}
+          className={`pr-1 md:pr-0 sm:pr-0 ${styles["items_container"]}  rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear shadow-2xl`}
         >
           <img
             src={`http://img.ophim1.com/uploads/movies/${thumb_url}`}
@@ -44,12 +44,12 @@ export default function Items({ id, thumb_url, name, year, slug }: Props) {
             <p className="text-start leading-7">{year}</p>
           </div>
           <div
-            className={`absolute  right-1   bottom-0 font-medium text-white bg-blue-500 rounded-br-md`}
+            className={`absolute  right-0 bottom-0 font-medium text-white bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  rounded-br-md`}
           >
-            <h2 className="text-end px-1 py-2 text-sm">HD VIETSUB</h2>
+            <h2 className="text-end px-1 py-2 text-sm ">HD VIETSUB</h2>
           </div>
           <div
-            className={`absolute top-0 right-1 left-0 bottom-0 bg-black/[0.3] hidden  items-center justify-center rounded-md ${styles["items_container-button"]} `}
+            className={`absolute top-0 right-0 left-0 bottom-0 bg-black/[0.3] hidden  items-center justify-center rounded-md ${styles["items_container-button"]} `}
           >
             <Link
               href={`/xem-chi-tiet/${slug}`}
