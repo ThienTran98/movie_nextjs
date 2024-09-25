@@ -8,6 +8,7 @@ import MovieTheaters from "./MovieTheaters/MovieTheaters";
 import SeriesMovie from "./SeriesMovie/SeriesMovie";
 import SingleMovie from "./SingleMovie/SingleMovie";
 import News from "./News/News";
+import Loading from "@/Component/Loading/Loading";
 
 type Props = {};
 
@@ -15,26 +16,24 @@ export default function HomePage({}: Props) {
   return (
     <div className="">
       <Header />
-
-      <Suspense fallback={""}>
+      <Suspense fallback={<Loading />}>
         <Banner />
       </Suspense>
-      <Suspense fallback={""}>
+      <Suspense fallback={<Loading />}>
         <FeaturedMovie />
       </Suspense>
-      <Suspense fallback={""}>
+      <Suspense fallback={<Loading />}>
         <MovieTheaters />
       </Suspense>
-      <Suspense fallback={""}>
+      <Suspense fallback={<Loading />}>
         <SeriesMovie />
       </Suspense>
-      <Suspense fallback={""}>
+      <Suspense fallback={<Loading />}>
         <SingleMovie />
       </Suspense>
-      <Suspense fallback={""}>
+      <Suspense fallback={<Loading />}>
         <News />
       </Suspense>
-
       <Footer />
     </div>
   );

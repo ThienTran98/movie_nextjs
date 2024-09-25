@@ -58,7 +58,7 @@ export default function Header({}: Props) {
             <Fragment>
               {item.title === "Thể Loại" ? (
                 <Fragment>
-                  <div className="absolute top-[150%] left-[-200%] w-[360px] h-[260px] text-red-700 grid grid-cols-3 bg-[#1e293b] px-5 py-2 text-center rounded-md">
+                  <div className="absolute z-50 top-[150%] left-[-200%] w-[360px] h-[260px] text-red-700 grid grid-cols-3 bg-[#1e293b] px-5 py-2 text-center rounded-md">
                     {item.subList?.map((i, index) => {
                       return (
                         <Link
