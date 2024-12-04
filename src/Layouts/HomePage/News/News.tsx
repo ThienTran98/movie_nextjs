@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -12,6 +13,13 @@ export default function News({}: Props) {
         <button className="text-white font-semibold text-sm p-2 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl  focus:outline-none   hover:transition-all hover:opacity-90 rounded-lg  text-center ">
           Xem thêm
         </button>
+      </div>
+      <div>
+        <h2 className="text-white font-medium pt-4">
+          <a href="https://daophimtrung.net/">
+            Top phim và chương trình ăn khách nhất trên Netflix từ trước đến nay
+          </a>
+        </h2>
       </div>
       {/* <div className="pt-5 pb-3 grid grid-cols-5 gap-2">
     {renderFeatureMovie()}

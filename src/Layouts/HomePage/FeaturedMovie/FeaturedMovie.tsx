@@ -20,9 +20,8 @@ interface isFeatureMovie {
   _id: string;
 }
 export default function FeaturedMovie({}: Props) {
-  
   const [movieList, setMovieList] = useState<isFeatureMovie[]>([]);
-  
+
   const router = useRouter();
   const handleNavigate = () => {
     router.push("/xem-chi-tiet");
@@ -42,7 +41,7 @@ export default function FeaturedMovie({}: Props) {
       return (
         <Items
           key={item._id}
-          thumb_url={item.thumb_url}
+          thumb_url={item?.thumb_url}
           name={item.name}
           year={item.year}
           slug={item.slug}

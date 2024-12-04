@@ -97,7 +97,7 @@ export default function Banner({}: Props) {
       return (
         <Items
           key={index}
-          thumb_url={item.thumb_url}
+          thumb_url={item?.thumb_url}
           name={item.name}
           year={item.year}
           slug={item.slug}

@@ -39,7 +39,7 @@ export default function SeriesMovie({}: Props) {
       return (
         <Items
           key={item._id}
-          thumb_url={item.thumb_url}
+          thumb_url={item?.thumb_url}
           name={item.name}
           year={item.year}
           slug={item.slug}
