@@ -39,7 +39,7 @@ export default function MovieTheaters({}: Props) {
       return (
         <Items
           key={item._id}
-          thumb_url={item.thumb_url}
+          thumb_url={item?.thumb_url}
           name={item.name}
           year={item.year}
           slug={item.slug}
@@ -60,7 +60,7 @@ export default function MovieTheaters({}: Props) {
           Xem thêm
         </button>
       </div>
-      <div className="pt-5 pb-3 grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 md:gap-1 lg:gap-2 gap-1">
+      <div className="pt-5 pb-3 grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 md:gap-2 lg:gap-2 gap-1">
         {renderFeatureMovie()}
       </div>
     </div>

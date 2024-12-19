@@ -44,6 +44,7 @@ export default function Banner({}: Props) {
     autoplay: true,
     cssEase: "linear",
     arrows: true,
+
     responsive: [
       {
         breakpoint: 1024,
@@ -107,7 +108,7 @@ export default function Banner({}: Props) {
   };
   return (
     <Fragment>
-      <div className="slider-container pt-5 pb-3  px-8">
+      <div className="slider-container pt-5 pb-3 px-8">
         <Slider {...settings}>{renderBanner()}</Slider>
       </div>
     </Fragment>

@@ -30,7 +30,7 @@ export default function Items({ id, thumb_url, name, year, slug }: Props) {
     <div className="relative">
       {!isLoading ? (
         <div
-          className={`pr-1 md:pr-0 sm:pr-0 ${styles["items_container"]}  rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear shadow-2xl`}
+          className={`pr-1 md:pr-0 sm:pr-0 ${styles["items_container"]} pr-2  rounded-md hover:cursor-pointer hover:scale-90 hover:delay-100 hover:duration-300 hover:ease-linear shadow-2xl`}
         >
           <img
             src={`http://img.ophim1.com/uploads/movies/${thumb_url}`}
@@ -63,7 +63,7 @@ export default function Items({ id, thumb_url, name, year, slug }: Props) {
         </div>
       ) : (
         <SkeletonTheme baseColor="#f7f7f7" highlightColor="#ccc">
-          <Skeleton className="lg:w-full lg:h-[360px] md:w-full md:h-[360px] w-full h-[360px] rounded-md  object-cover relative "></Skeleton>
+          <Skeleton className="lg:w-full lg:h-[360px] px-3 md:w-full md:h-[360px] w-full h-[360px] rounded-md  object-cover relative "></Skeleton>
         </SkeletonTheme>
       )}
     </div>

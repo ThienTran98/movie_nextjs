@@ -72,7 +72,7 @@ export default function DetailPage({}: Props) {
         Phim mới
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-1">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 px-3 md:px-6 lg:px-6">
         {renderListItemsMovie()}
       </div>
       <div className="flex items-center justify-center text-white py-5">

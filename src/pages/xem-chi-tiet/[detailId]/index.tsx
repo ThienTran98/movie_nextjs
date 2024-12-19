@@ -134,6 +134,7 @@ export default function Detail({}: Props) {
     setIsActive(index);
     setLinkEpisoder(item.link_embed);
   };
+
   const renderButtonChapFilm = () => {
     if (detailMovie?.episodes[0]?.server_name === changeSever) {
       return (
@@ -192,7 +193,7 @@ export default function Detail({}: Props) {
                 src={
                   linkEpisoder
                     ? linkEpisoder
-                    : `${detailMovie?.episodes[1].server_data[0].link_embed}`
+                    : `${detailMovie?.episodes[1]?.server_data[0]?.link_embed}`
                 }
                 width="100%"
                 height={400}
@@ -210,7 +211,7 @@ export default function Detail({}: Props) {
           {renderServerName()}
           <div className="text-white font-semibold my-3">Chọn tập phim :</div>
           <div className="">
-            {detailMovie?.episodes[1].server_data.map((_item, _index) => {
+            {detailMovie?.episodes[1]?.server_data?.map((_item, _index) => {
               return (
                 <Fragment key={_index}>
                   <button
